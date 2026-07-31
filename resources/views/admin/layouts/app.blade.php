@@ -74,6 +74,7 @@
   <script src="{{ asset('/js/axios.min.js') }}"></script>
   <script src="{{ asset('/js/sweetalert2@11.js') }}"></script>
   <script src="{{ asset('/js/html-react-parser.min.js') }}"></script>
+  <script src="{{ asset('/js/script.js?v=' . time()) }}"></script>
   <script src="{{ asset('/administrator/js/script.js?v=' . time()) }}"></script>
 </head>
 
