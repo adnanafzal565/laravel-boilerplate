@@ -41,6 +41,7 @@ Route::get("/change_password", [UserController::class, "change_password"])
 Route::group([
     "middleware" => [UserAuth::class]
 ], function () {
+    // for admin logout
     Route::get("/logout", [UserController::class, "logout"])
         ->name("logout");
 });
