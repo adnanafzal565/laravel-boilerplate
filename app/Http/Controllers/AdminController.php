@@ -164,7 +164,7 @@ class AdminController extends Controller
                 "password" => $password
             ], true))
             {
-                if (request()->expectsJson())
+                /*if (request()->expectsJson())
                 {
                     $token = $user->createToken(config("config.token_secret"))->plainTextToken;
 
@@ -173,7 +173,7 @@ class AdminController extends Controller
                         "message" => "Login successfully.",
                         "access_token" => $token
                     ]);
-                }
+                }*/
 
                 return response()->json([
                     "status" => "success",

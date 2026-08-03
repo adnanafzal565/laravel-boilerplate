@@ -108,6 +108,17 @@
       user = JSON.parse(document.getElementById("user").value);
     }
 
+    async function onInit() {
+      await ajax('/me', null, function (response) {
+          user = response.user;
+
+          // for React
+          globalState.setState({
+              user: response.user
+          });
+      });
+    }
+
     if (user != null) {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       fetch(baseUrl + "/set_timezone", {
@@ -120,6 +131,8 @@
           "timezone": timezone
         })
       });
+
+      onInit();
     }
   </script>
 

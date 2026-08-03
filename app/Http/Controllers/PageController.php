@@ -130,6 +130,12 @@ class PageController extends Controller
                 ]);
             }
         }
+        
+        if (view()->exists("theme::pages/" . $slug)) {
+            $data = [];
+            
+            return view("theme::pages/" . $slug, $data);
+        }
 
         abort(404, "Page not found.");
     }

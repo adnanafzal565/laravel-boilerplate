@@ -129,8 +129,8 @@
           )
 
           if (response.data.status == "success") {
-            const accessToken = response.data.access_token
-            localStorage.setItem(accessTokenKey, accessToken)
+            // const accessToken = response.data.access_token
+            // localStorage.setItem(accessTokenKey, accessToken)
             window.location.href = baseUrl + "/admin"
           } else {
             swal.fire("Error", response.data.message, "error")
