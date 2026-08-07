@@ -6,15 +6,15 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="offset-4 col-4">
-                <h2>Forget password</h2>
+                <h2>Forget Password</h2>
 
                 <form onsubmit="sendResetLink()">
                     <div class="form-group">
-                        <label class="form-label">Enter email</label>
+                        <label class="form-label">Enter Email</label>
                         <input type="email" name="email" class="form-control" required />
                     </div>
 
-                    <input type="submit" name="submit" class="btn btn-outline-primary btn-sm" value="Send reset link" style="margin-top: 10px;" />
+                    <input type="submit" name="submit" class="btn btn-outline-primary btn-sm" value="Send Reset Link" style="margin-top: 10px;" />
                 </form>
             </div>
         </div>

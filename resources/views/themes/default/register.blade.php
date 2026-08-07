@@ -10,22 +10,22 @@
 
                 <form onsubmit="doRegister()">
                     <div class="form-group mt-4">
-                        <label class="form-label">Enter name</label>
+                        <label class="form-label">Enter Name</label>
                         <input type="text" name="name" class="form-control" required />
                     </div>
 
                     <div class="form-group mt-3">
-                        <label class="form-label">Enter email</label>
+                        <label class="form-label">Enter Email</label>
                         <input type="email" name="email" class="form-control" required />
                     </div>
 
                     <div class="form-group mt-3">
-                        <label class="form-label">Enter password</label>
+                        <label class="form-label">Enter Password</label>
                         <input type="password" name="password" id="password" class="form-control" required />
 
                         <label class="mt-3">
                             <input type="checkbox" id="togglePassword">
-                            Show password
+                            Show Password
                         </label>
                     </div>
 

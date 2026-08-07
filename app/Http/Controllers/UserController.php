@@ -949,7 +949,7 @@ class UserController extends Controller
         $token = request()->token ?? "";
         $email = request()->email ?? "";
 
-        return view("reset-password", [
+        return view("theme::reset_password", [
             "email" => $email,
             "token" => $token
         ]);
@@ -980,14 +980,19 @@ class UserController extends Controller
 
             $name = request()->name ?? "";
             $email = request()->email ?? "";
-            $username = strtok($email, "@");
+            $username = strtolower(strtok($email, "@"));
+            $username = preg_replace("/[^a-z0-9_]/", "", $username);
+
+            if (User::where("username", $username)->exists()) {
+                $username .= "_" . substr(uniqid(), -6);
+            }
             $password = request()->password ?? "";
 
-            if (User::where("username", $username)->exists())
+            if (User::where("email", $email)->exists())
             {
                 return response()->json([
                     "status" => "error",
-                    "message" => "Username already exists."
+                    "message" => "Email already exists."
                 ]);
             }
 

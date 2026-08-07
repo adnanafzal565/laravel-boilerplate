@@ -6,19 +6,19 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="offset-4 col-4">
-                <h2>Reset password</h2>
+                <h2>Reset Password</h2>
 
                 <form onsubmit="resetPassword()">
                     <input type="hidden" name="email" value="{{ $email }}" />
                     <input type="hidden" name="token" value="{{ $token }}" />
 
                     <div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
-                        <label class="form-label">Enter password</label>
+                        <label class="form-label">Enter Password</label>
                         <input type="password" name="password" class="form-control" required />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Confirm password</label>
+                        <label class="form-label">Confirm Password</label>
                         <input type="password" name="password_confirmation" class="form-control" required />
                     </div>
 

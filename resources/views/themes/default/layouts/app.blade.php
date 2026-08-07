@@ -139,11 +139,16 @@
             const [logging_out, set_logging_out] = React.useState(false);
 
             async function onInit() {
+                if (!localStorage.getItem(accessTokenKey)) {
+                    set_loading(false);
+                    return;
+                }
+
                 await ajax('/api/me', null, function (response) {
                     window.user = response.user;
                     const unread_notifications = response.unread_notifications;
 
-                    if (unread_notifications > 0) {
+                    if (unread_notifications > 0 && document.getElementById("name-notifications-count")) {
                         document.getElementById("name-notifications-count").innerHTML = `(${unread_notifications})`;
                     }
 
