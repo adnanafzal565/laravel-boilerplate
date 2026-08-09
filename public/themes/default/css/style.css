@@ -2,6 +2,11 @@
     --color-primary: #222;
 }
 
+.username {
+    display: inline-block;
+    min-width: 7ch;
+}
+
 .list-group-item.active,
 .btn.btn-primary {
     background-color: var(--color-primary) !important;

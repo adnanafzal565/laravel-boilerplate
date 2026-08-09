@@ -25,6 +25,12 @@ const globalState = {
     }
 }
 
+function truncate_text(text, length = 7) {
+    return text.length > length
+        ? text.substring(0, length) + "..."
+        : text;
+}
+
 function get_type_from_path(file = "") {
     const extension = file.split(".").pop().toLowerCase();
 

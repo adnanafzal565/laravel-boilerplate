@@ -84,7 +84,30 @@
                         </li>
                     @endforeach
 
-                    <li id="header_user_view_app"></li>
+                    <li class="nav-item dropdown" id="header_user_view_app">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Account
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a href="{{ route('login') }}"
+                                    class="dropdown-item">Login</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('register') }}"
+                                    class="dropdown-item">Sign Up</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -134,13 +157,11 @@
     <script type="text/babel">
         function HeaderUserViewApp() {
 
-            const [loading, set_loading] = React.useState(true);
             const [state, set_state] = React.useState(globalState.state);
             const [logging_out, set_logging_out] = React.useState(false);
 
             async function onInit() {
                 if (!localStorage.getItem(accessTokenKey)) {
-                    set_loading(false);
                     return;
                 }
 
@@ -162,8 +183,6 @@
                         user: response.user
                     });
                 });
-
-                set_loading(false);
             }
 
             async function do_logout(event) {
@@ -184,69 +203,61 @@
                 onInit();
             }, []);
 
-            React.useEffect(() => {
-                document.getElementById('header_user_view_app').className = (state.user ? 'nav-item dropdown' : '');
-            }, [state.user]);
-
             return (
                 <>
-                    { !loading && (
-                        <>
-                            { state.user ? (
-                                <>
-                                    <a
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
-                                        id="navbarDropdown"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        {state.user.name || ""}
+                    <a
+                        className="nav-link dropdown-toggle username"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        {truncate_text(state.user?.name || "Account")}
+                    </a>
+
+                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        { state.user ? (
+                            <>
+                                { ["admin", "super_admin"].includes(state.user.type) && (
+                                    <li>
+                                        <a className="dropdown-item"
+                                            href={ route_admin_dashboard }>
+                                            Admin Panel
+                                        </a>
+                                    </li>
+                                ) }
+
+                                <li>
+                                    <a className="dropdown-item"
+                                        href={ route_profile }>
+                                        Profile
                                     </a>
+                                </li>
 
-                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        {
-                                            ["admin", "super_admin"].includes(state.user.type) && (
-                                                <li>
-                                                    <a className="dropdown-item"
-                                                        href={ route_admin_dashboard }>
-                                                        Admin Panel
-                                                    </a>
-                                                </li>
-                                            )
-                                        }
+                                <li>
+                                    <a href="#"
+                                        className="dropdown-item"
+                                        onClick={ do_logout }
+                                    >
+                                        { logging_out ? 'Logging out...' : 'Logout' }
+                                    </a>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <a href={ route_login }
+                                        className="dropdown-item">Login</a>
+                                </li>
 
-                                        <li>
-                                            <a className="dropdown-item"
-                                                href={ route_profile }>
-                                                Profile
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#"
-                                                className="dropdown-item"
-                                                onClick={ do_logout }
-                                            >
-                                                { logging_out ? 'Logging out...' : 'Logout' }
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </>
-                            ) : (
-                                <ul>
-                                    <li>
-                                        <a href={ route_login }>Login</a>
-                                    </li>
-
-                                    <li>
-                                        <a href={ route_register }>Sign Up</a>
-                                    </li>
-                                </ul>
-                            ) }
-                        </>
-                    ) }
+                                <li>
+                                    <a href={ route_register }
+                                        className="dropdown-item">Sign Up</a>
+                                </li>
+                            </>
+                        ) }
+                    </ul>
                 </>
             );
         }
